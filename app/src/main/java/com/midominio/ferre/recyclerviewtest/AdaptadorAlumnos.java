@@ -14,12 +14,17 @@ import java.util.ArrayList;
  * Created by JosePablo on 18/10/2017.
  */
 
-public class AdaptadorAlumnos extends RecyclerView.Adapter<AdaptadorAlumnos.AlumnosViewHolder> {
+public class AdaptadorAlumnos extends RecyclerView.Adapter<AdaptadorAlumnos.AlumnosViewHolder> implements View.OnClickListener{
 
     private ArrayList<Alumno> datos;
+    private View.OnClickListener listener;
 
     public AdaptadorAlumnos(ArrayList<Alumno> datos) {
         this.datos = datos;
+    }
+
+    public void setOnClickListener(View.OnClickListener listener) {
+        this.listener = listener;
     }
 
     @Override
@@ -28,6 +33,8 @@ public class AdaptadorAlumnos extends RecyclerView.Adapter<AdaptadorAlumnos.Alum
                 .inflate(R.layout.elementoalumno, viewGroup, false);
 
         AlumnosViewHolder avh = new AlumnosViewHolder(itemView);
+
+        itemView.setOnClickListener(this);
 
         return avh;
     }
@@ -42,6 +49,13 @@ public class AdaptadorAlumnos extends RecyclerView.Adapter<AdaptadorAlumnos.Alum
     @Override
     public int getItemCount() {
         return datos.size();
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(listener != null){
+            listener.onClick(v);
+        }
     }
 
     public class AlumnosViewHolder extends RecyclerView.ViewHolder {

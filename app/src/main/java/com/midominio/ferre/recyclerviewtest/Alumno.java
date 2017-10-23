@@ -38,4 +38,8 @@ public class Alumno
         return nivel;
     }
 
+    public void setNombre(String name) {
+        nombre += name;
+    }
+
 }
